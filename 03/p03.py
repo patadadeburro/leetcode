@@ -28,8 +28,6 @@ Algorithm Intuition: create a dictionary 'counts' with char and (i1, i2, i3, ...
 
 author: Arturo Alatriste Trujillo.
 ------------------------------------------------------------------------------- '''
-
-from collections import OrderedDict
 from collections import defaultdict
 
 class Solution(object):
@@ -48,61 +46,92 @@ class Solution(object):
 
         return d
 
-    def get_candidates( self, counts, a ):
+    def has_repeated_char( self, counts, a, ch, star_index, end_index ):
         '''
-        create a list of candidates. Each candidate is a tuple
-            ( size, substring, start_index, end_index )
+        check if char ch is repeated in a
         :param counts:
-        :param a: string
+        :param a:
+        :param ch:
+        :param star_index:
+        :param end_index:
         :return:
         '''
-        candidates = list()
+        result = False
+        indexes = counts[ ch ]
+        if len( indexes ) == 1:
+            return False
+
+        s = 0
+        i = 0
+        while i < len(indexes) and s < 2:
+            ind = indexes[ i ]
+            if ind >= star_index and ind <= end_index:
+                s = s + 1
+            i = i + 1
+
+        if s >= 2:
+            result = True
+
+        return  result
+
+    def is_unique(self, counts, a, start_index, end_index):
         for ch, indexes in counts.items():
-            previous = indexes[ 0 ]
-            if len( indexes ) == 1:
+            if indexes[0] > end_index:
+                break
+            if len(indexes) == 1:
                 continue
 
-            for i in indexes:
-                if previous != i:
-                    t = ( i - previous, a[ previous : i ], previous, i )
-                    candidates.append( t )
+            if self.has_repeated_char(counts, a, ch, start_index, end_index) == True:
+                return False
 
-                previous = i
+        return True
 
-        candidates = sorted( candidates, key = lambda t: -t[0] )
-        return candidates
+    def has_unique_substrings(self, counts, s, size ):
+        result = False
 
-    def get_solutions( self, candidates ):
-        print( 'todo: code this' )
+        #print( '\n has_unique_substrings, size: {}'.format( size )  )
+        for i in range( 0, len(s) - size+1 ):
+            a = s[ i : i + size ]
+            start_index = i
+            end_index   = i + size -1
+            r = self.is_unique(counts, a, i, i + size - 1)
+            #print('a: {}, start_index: {}, end_index: {}, unique: {}'.format(a, start_index, end_index, r))
 
+            if r == True:
+                return True
+        return result
 
     def lengthOfLongestSubstring(self, s):
         """
         :type s: str
         :rtype: int
         """
-        result = ''
+        n = len( s )
+        result     = ''
+        counts     = self.get_counts( s )
 
 
+        for size in range( n, 0, -1):
+            if self.has_unique_substrings( counts, s, size ) == True:
+                return size
 
-        return  result
+        return  0
 
 
 #-------------------------------------------------------------------------------
-
+# Unit Test
+#-------------------------------------------------------------------------------
+'''
 a = 'abcabcbb'
+#a = 'aab'
 print( 'input: {}'.format( a ) )
 
-s = Solution()
-counts = s.get_counts( a )
+s      = Solution()
+output = s.lengthOfLongestSubstring( a )
+print( 'output: {}'.format( output ) )
 
-print( 'counts' )
-for ch, ind in counts.items():
-    print( '{} \t {}'.format( ch, ind ) )
 
-print( '\ncandidates' )
-candidates = s.get_candidates( counts, a )
-for c in candidates:
-    print( c )
+
 
 print( 'end.' )
+'''

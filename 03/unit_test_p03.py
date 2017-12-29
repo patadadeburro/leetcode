@@ -84,6 +84,19 @@ t.bigest   = 'wke'
 t.expected = 3
 test_cases.append(t)
 
+t = test_case()
+t.desc     = 'example 9.'
+t.a_string = 'nfpdmpi'
+t.bigest   = 'nfpdm'
+t.expected = 5
+test_cases.append(t)
+
+t = test_case()
+t.desc     = 'example 10.'
+t.a_string = 'ckilbkd'
+t.bigest   = 'ckilb'
+t.expected = 5
+test_cases.append(t)
 
 # ------------------------------------------------------------------------------------
 
@@ -93,13 +106,5 @@ for i in test_cases:
     #print( '{} \t{} \t{}'.format( i.desc, i.inputList, i.output ) )
     r = 0
     print( '-' * 69 )
-    print( i.desc )
-    print( 'a_string = {}'.format( i.a_string     ) )
-    #print( 'target   = {}'.format( i.target   ) )
-    print( 'expected = {}'.format( i.expected ) )
     r =  s.lengthOfLongestSubstring( i.a_string )
-    print( 'result   = {}'.format( r ))
-    if i.expected == r:
-        print( 'passed: \t\t\t Correct!' )
-    else:
-        print( 'passed: \t\t\t wrong' )
+    print( '{} input={} expected={} result={} passed={}'.format(i.desc, i.a_string, i.expected, r, i.expected== r  ) )

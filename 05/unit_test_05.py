@@ -41,6 +41,11 @@ t.input    = "anugnxshgonmqydttcvmtsoaprxnhpmpovdolbidqiyqubirkvhwppcdyeouvgedcc
 t.expected = 'hpyyph'
 test_cases.append(t)
 
+t = test_case()
+t.desc     = 'example 4.'
+t.input    = 'aaaa'
+t.expected = [ 'aaaa' ]
+test_cases.append(t)
 
 # ------------------------------------------------------------------------------------
 # Run Test
@@ -54,11 +59,13 @@ r = 0
 s = p05.Solution()
 print('-' * 69)
 
-print( 'passed desc        input 9 ch  expected  result  process_time')
-print( '------ ----------  ----------  -------- -------- ------------')
+print( 'passed desc        input 9 ch  expected          result  process_time')
+print( '------ ----------  ----------  ----------------  ------  ---------------')
 passed = ''
 for i in test_cases:
     start_time = time.time()
+    a = i.input
+    ex= i.expected
     r          =  s.longestPalindrome( i.input )
     end_time   = time.time()
 
@@ -74,5 +81,5 @@ for i in test_cases:
     else:
         passed = 'X'
 
-    print( '{:^6} {: <12} {:<9} {: <14} {: >8} {:<15}'
-            .format( passed, i.desc, i.input[:9], str(i.expected)[:14], r, d ) )
+    print( '{:^6} {: <12} {:<9} {: <19} {:<6} {:<22}'
+            .format( passed, i.desc, i.input[:9], str(i.expected)[:19], r, d ) )

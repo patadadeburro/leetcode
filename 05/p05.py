@@ -68,8 +68,26 @@ class Solution:
                 j   += 1
             else:
                 break
-
         return  size
+
+    def get_pal_tuple(self, s, i, j):
+        n     = len( s )
+        size  = 0
+        start = i
+        end   = j
+        while i >= 0 and j < n:
+            if self.is_palindrome_ij( s, i, j ) == True:
+                start = i
+                end   = j
+                size  = j - i + 1
+                i    -= 1
+                j    += 1
+            else:
+                break
+
+        return  (size, s[ start : end + 1], start, end )
+
+
 
     def get_candidates_size(self, candidates, s):
         can_sizes = []
@@ -77,7 +95,6 @@ class Solution:
             i = c[2]
             j = c[3]
             size = self.get_pal_size( s, i, j)
-
             if size == 2:
                 t = (size, s[ i: j + 1], i, j)
             else:
@@ -86,11 +103,21 @@ class Solution:
                     h = (size // 2) - 1
                 t = ( size, s[ i-h: j + h + 1], i, j)
             can_sizes.append( t )
-
         if len( can_sizes ) > 0:
             can_sizes = sorted(can_sizes, key=lambda t: -t[0])
-
         return can_sizes
+
+    def get_candidates_size2(self, candidates, s):
+        can_sizes = []
+        for c in candidates:
+            i = c[2]
+            j = c[3]
+            t = self.get_pal_tuple ( s, i, j)
+            can_sizes.append( t )
+        if len( can_sizes ) > 0:
+            can_sizes = sorted(can_sizes, key=lambda t: -t[0])
+        return can_sizes
+
 
     def longestPalindrome(self, s):
         """
@@ -103,14 +130,14 @@ class Solution:
 
         candidates = self.get_candidates( s )
 
-        print( 'candidates' )
-        for c in candidates:
-            print( c )
+        #print( 'candidates' )
+        #for c in candidates:
+        #    print( c )
 
-        can_sizes  = self.get_candidates_size( candidates, s )
-        print( '\ncan_sizes' )
-        for c in can_sizes:
-            print( c )
+        can_sizes  = self.get_candidates_size2( candidates, s )
+        #print( '\ncan_sizes' )
+        #for c in can_sizes:
+        #    print( c )
 
 
         if len(can_sizes) != 0:

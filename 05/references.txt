@@ -1,0 +1,36 @@
+https://articles.leetcode.com/longest-palindromic-substring-part-ii/
+https://en.wikipedia.org/wiki/Longest_palindromic_substring
+
+Longest Palindromic Substring O(N) Manacher's Algorithm
+IDeserve
+https://www.youtube.com/watch?v=nbTSfrEfo6M
+
+
+-------------------------------------------------------------------------------
+
+Jewels of Stringology 
+by Wojciech Rytter (Author),? Maxime Crochemore  (Author)
+
+ISBN-13: 978-9810248970
+ISBN-10: 9810248970
+
+document_id: 181828146
+access key : key-2cjp7kz6udzl6v6krpe8
+https://es.scribd.com/document/181828146/2Q8F6guU-jewels-of-stringology-pdf
+http://d1.scribdassets.com/ScribdViewer.swf?document_id=181828146&access_key=key-2cjp7kz6udzl6v6krpe8
+
+-------------------------------------------------------------------------------
+
+Algorithms on Strings, Trees and Sequences
+by Dan Gusfield
+Publisher: Cambridge University Press
+Release Date: May 1997
+ISBN: 9781139636285
+
+chapter 9.2. Finding all maximal palindromes in linear time
+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------

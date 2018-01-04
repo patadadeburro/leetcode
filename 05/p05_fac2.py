@@ -23,7 +23,12 @@ Algorithm Intuition:
                      Do not store all palindromes, and do not sort.
                      return biggest candidate.
 
-Accepted.
+Time complexity  : O(n^2)O(n2​​ ). Since expanding a palindrome around its center could take O(n)O(n) time,
+                  the overall complexity is O(n^2)O(n​2​​ ).
+
+Space complexity : O(1)O(1).
+
+Accepted. 515 ms
 
 ------------------------------------------------------------------------------- '''
 
@@ -113,7 +118,10 @@ class Solution:
         :return : a string that is the biggest palindrome
         '''
         n    = len( s )
-        if n <= 1 or len( s.replace( s[0], '' ) ) == 0:
+        if n <= 1:
+            return s
+
+        if len( s.replace( s[0], '' ) ) == 0:
             return s
 
         candidates = self.get_candidates( s )

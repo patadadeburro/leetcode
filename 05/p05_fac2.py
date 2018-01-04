@@ -30,18 +30,6 @@ Accepted.
 
 class Solution:
 
-    def is_palindrome_ij(self, s, i, j ):
-        '''
-        check if characters at index i and j are equal.
-        :param s: string
-        :param i: start index
-        :param j: end   index
-        :return : True if characters at index i and j are equal, other case False.
-        '''
-        if s[ i ] == s[ j ]:
-            return True
-        return False
-
     def get_candidates(self, s ):
         '''
         Find all the palindrome candidates. we do not check the size of the palindrome here.
@@ -51,23 +39,25 @@ class Solution:
         n          = len( s )
         candidates = []
         for i in range( 0, n - 2):
+            # candidates of len 2
             j = i + 1
             a = s[ i : j +1 ]
-            if self.is_palindrome_ij( s, i, j ):
-                # tuple = ( size, substring, i, j )
+            if s[i] == s[j]:
                 t = ( 2, a, i, j )
                 candidates.append( t )
+
+            # candidates of len 3
             j = i + 2
             a = s[ i : j + 1]
-            if self.is_palindrome_ij( s, i, j ):
+            if s[i] == s[j]:
                 t = (3, a, i, j)
                 candidates.append(t)
 
+        # add the last candidate of len 2
         i = n-2
         j = n-1
         a = s[ i : j +1 ]
-        if self.is_palindrome_ij( s, i, j ):
-            # tuple = ( size, substring, i, j )
+        if s[i] == s[j]:
             t = ( 2, a, i, j )
             candidates.append( t )
 
@@ -86,7 +76,8 @@ class Solution:
         start = i
         end   = j
         while i >= 0 and j < n:
-            if self.is_palindrome_ij( s, i, j ) == True:
+            #if self.is_palindrome_ij( s, i, j ):
+            if s[i] == s[j]:
                 start = i
                 end   = j
                 size  = j - i + 1
@@ -99,18 +90,18 @@ class Solution:
 
     def get_biggest_palindrome(self, candidates, s):
         '''
-        get the biggest palindrome from the candidates collection
+        get the biggest palindrome from the candidates collection.
         :param candidates:
         :param s:
-        :return:
+        :return: a tuple ( size, palindrome, start_index, end_index ),
+                 where
+                    start_index is the element at position [2]
+                    end_index   is the element at position [3]
+
         '''
         biggest = ( 0, '', 0, 0)
-        can_sizes = []
         for c in candidates:
-            i = c[2]
-            j = c[3]
-            t = self.get_pal_tuple ( s, i, j)
-
+            t       = self.get_pal_tuple ( s, c[2], c[3] )
             biggest = max( biggest, t, key = lambda x: x[0] )
 
         return biggest

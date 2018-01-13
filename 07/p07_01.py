@@ -28,14 +28,13 @@ Accepted: 104 ms
 
 class Solution:
     def reverse(self, x):
-        """
+        """ We create the reversed integer using the modulo operator :)
         :type x: int
         :rtype: int
         """
         r = 0
         i = abs( x )
         while i != 0:
-            #m = i % 10
             r = r * 10 + i % 10
             i = i // 10
 
